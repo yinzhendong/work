@@ -3,6 +3,9 @@
 enzo_home=/root/enzo
 tomcat_home=/home/boful/tomcat
 
+# stop bcms
+kill -9 `jps |grep Bootstrap |awk '{print $1}'`
+
 # start tomcat
 cd $tomcat_home/bin
 ./startup.sh
