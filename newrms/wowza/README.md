@@ -1,4 +1,6 @@
 #### Wowza
+`http://www.wowza.com/forums/content.php?217-How-to-install-and-configure-Wowza-Streaming-Engine`
+
 
 ##### install wowza
 ```
