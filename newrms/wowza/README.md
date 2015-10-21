@@ -15,3 +15,13 @@ chmod a+x WowzaStreamingEngine-4.3.0-linux-x64-installer.run
 ```
 http://ip:1935
 ```
+
+##### Streaming test
+```
+http://ip:8088/enginemanager
+```
+##### firewall port
+```
+1935
+8088
+```
