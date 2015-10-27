@@ -6,4 +6,8 @@ vi /etc/my.cnf
 
 // add skip-grant
 
+// monitor msyql
+mytop
+mysqlreport
+
 ```

@@ -1,4 +1,4 @@
-### Git Skills
+#### Git Skills
 
 **git initialization**
 
@@ -24,4 +24,13 @@ rm -rf .git
 git config --global core.autocrlf false
 git init
 
+```
+
+#### tomcat session timeout
+
+`vi modify web.xml`
+```
+<session-config>
+        <session-timeout>30</session-timeout>
+</session-config>
 ```
