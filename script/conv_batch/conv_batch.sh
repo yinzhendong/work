@@ -26,7 +26,7 @@ for file_path in `cat $file_name`; do
 	#echo $file_height
 
 	# use HandBrake conv file to mp4
-	echo "HandBrakeCLI -i $file_path -o ${file_path%/*}/${file_name%.*}.mp4 -e x264 --vb $file_vb_kbps --ab $file_ab_kbps" --width $file_width --height $file_height >> ./conv_file.cmd
+	echo "HandBrakeCLI -i \"$file_path\" -o \"${file_path%/*}/${file_name%.*}.mp4\" -e x264 --vb $file_vb_kbps --ab $file_ab_kbps" --width $file_width --height $file_height >> ./conv_file.cmd
 	#convcmd=`HandBrakeCLI -i $file_path -o $file_path$file_name.mp4 -e x264 --vb $file_vb_kbps --ab $file_ab_kbps`
 done
 
