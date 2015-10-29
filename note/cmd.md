@@ -10,3 +10,5 @@ xz -d **.tar.xz
 ```
 yum localinstall mysql57-community-release-el6-7.noarch.rpm
 ```
+##### find
+`find ./Discory\ Channel/ -exec convmv -f GBK -t UTF-8 --notest ./* {} \;`
