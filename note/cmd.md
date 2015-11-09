@@ -12,3 +12,8 @@ yum localinstall mysql57-community-release-el6-7.noarch.rpm
 ```
 ##### find
 `find ./Discory\ Channel/ -exec convmv -f GBK -t UTF-8 --notest ./* {} \;`
+
+##### seq
+`seq -f dir%3g | xargs mkdir`
+`seq -s ":" 1 9`
+`mkdir {1..9}`
