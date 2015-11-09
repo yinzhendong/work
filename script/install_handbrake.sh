@@ -9,7 +9,6 @@ cd x264/
 ./configure --enable-static --enable-shared
 make
 make install
-ln -s /usr/local/lib/libmp3lame.so.0.0.0 /usr/lib64/libmp3lame.so.0
 
 # install lame
 cd $path
@@ -18,7 +17,6 @@ cd lame-3.99.5
 ./configure
 make
 make install
-ln -s /usr/local/lib/libx264.so.148 /usr/lib64/libx264.so.148
 
 # install HandBrake
 
@@ -34,5 +32,7 @@ cd HandBrake-0.10.2
 cd build/
 make install
 
+ln -s /usr/local/lib/libx264.so.148 /usr/lib64/libx264.so.148
+ln -s /usr/local/lib/libmp3lame.so.0.0.0 /usr/lib64/libmp3lame.so.0
 ln -s /usr/local/bin/HandBrakeCLI /usr/bin/HandBrakeCLI
 
