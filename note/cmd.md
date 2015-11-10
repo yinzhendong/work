@@ -19,3 +19,13 @@ yum localinstall mysql57-community-release-el6-7.noarch.rpm
 `seq -s ":" 1 9`
 
 `mkdir {1..9}`
+
+##### Apache rewrite
+```
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^http://a.com/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://a.com$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.a.com/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.a.com$ [NC]
+RewriteRule .*\.(mp4|gif|jpg|png|swf)$ http://www.a.com/images/boful_default_img.png [R,NC]
+```
