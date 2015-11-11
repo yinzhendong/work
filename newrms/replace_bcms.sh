@@ -37,7 +37,7 @@ kill -9 `jps |grep Bootstrap |awk '{print $1}'`
 
 # replace bcms
 cd $bcms_root
-mv bcms bcmc.$update_time
+mv bcms bcms.$update_time
 mkdir bcms
 cd bcms
 cp $bcms_git/target/bcms-1.0.war ./
