@@ -29,3 +29,9 @@ RewriteCond %{HTTP_REFERER} !^http://www.a.com/.*$ [NC]
 RewriteCond %{HTTP_REFERER} !^http://www.a.com$ [NC]
 RewriteRule .*\.(mp4|gif|jpg|png|swf)$ http://www.a.com/images/boful_default_img.png [R,NC]
 ```
+##### Add time and user to history cmd
+
+```
+echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
+source /etc/profile
+```
