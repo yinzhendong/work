@@ -18,3 +18,8 @@ alter table resource add column recommend_number int(11);
 mysqldump -uroot -proot -B enzodemo --table resource_library_tags > resource_library_tags.sql
 mysqldump -opt -d enzodemo -uroot -proot > enzo.sql
 ```
+`select database();`
+
+##### insert
+
+`insert permission values('','','')`
