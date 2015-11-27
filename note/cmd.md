@@ -35,3 +35,8 @@ RewriteRule .*\.(mp4|gif|jpg|png|swf)$ http://www.a.com/images/boful_default_img
 echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
 source /etc/profile
 ```
+##### yum install handbrake
+```
+wget http://pkgrepo.linuxtech.net/el6/release/linuxtech.repo -P /etc/yum.repos.d/
+yum install handbrake-cli
+```
