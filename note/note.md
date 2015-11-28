@@ -34,3 +34,9 @@ git init
         <session-timeout>30</session-timeout>
 </session-config>
 ```
+
+#### mysql grant
+```
+grant all on *.* to root@'%' identified by 'password' with grant option;
+flush privileges;
+```
