@@ -40,3 +40,10 @@ source /etc/profile
 wget http://pkgrepo.linuxtech.net/el6/release/linuxtech.repo -P /etc/yum.repos.d/
 yum install handbrake-cli
 ```
+##### RPM
+```
+# query rpm package
+rpm -qa | grep packagename
+
+# remove rpm package
+rpm -e libmediainfo0-0.7.68-313.1.x86_64
