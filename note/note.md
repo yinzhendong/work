@@ -68,3 +68,8 @@ pid-file=/var/run/mysqld/mysqld.pid
 [client]
 default-character-set=utf8
 ```
+
+#### 编译安装python不能退格和上下键
+`
+yum install readline-devel.x86_64
+`
