@@ -47,3 +47,11 @@ rpm -qa | grep packagename
 
 # remove rpm package
 rpm -e libmediainfo0-0.7.68-313.1.x86_64
+```
+##### /etc/issue
+`more /etc/isssue`
+```
+[root@tmp workspace]# more /etc/issue
+CentOS release 6.7 (Final)
+Kernel \r on an \m
+```
