@@ -1,1 +1,7 @@
-## working include some conf file/shell scripts
+## principle
+```
+1. backup
+2. strong password
+3. don't expose port
+
+```
