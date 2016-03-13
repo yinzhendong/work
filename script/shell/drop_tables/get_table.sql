@@ -1,2 +1,0 @@
-use mysql
-show tables;

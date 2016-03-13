@@ -1,1 +1,0 @@
-sed 's/^\/root\/import_res\/movie\///' out
