@@ -100,6 +100,7 @@ mysqladmin -u root password "root"
 ####5. install tomcat & unzip war
 ```
 //安装路径以/usr/local/workspace为例
+mkdir -p /usr/local/workspace/web/bcms /usr/local/workspace/web/rms
 tar -zxvf apache-tomcat-7.0.64.tar.gz -C /usr/local/workspace/
 ln -s /usr/local/workspace/apache-tomcat-7.0.64/ /usr/local/workspace/tomcat
 
