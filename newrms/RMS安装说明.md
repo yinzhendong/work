@@ -100,7 +100,6 @@ mysqladmin -u root password "root"
 ####5. install tomcat & unzip war
 ```
 //安装路径以/usr/local/workspace为例
-mkdir -p /usr/local/workspace/web/bcms /usr/local/workspace/web/rms
 tar -zxvf apache-tomcat-7.0.64.tar.gz -C /usr/local/workspace/
 ln -s /usr/local/workspace/apache-tomcat-7.0.64/ /usr/local/workspace/tomcat
 
@@ -134,6 +133,7 @@ vi server.xml
 ----------------------------------------------------------------------------
 
 //解压war包到/usr/local/workspace/web
+mkdir -p /usr/local/workspace/web/bcms /usr/local/workspace/web/rms
 unzip bcms.war -d /usr/local/workspace/web/bcms
 unzip rms-2016-03-11-22-13-07.war -d /usr/local/workspace/web/rms
 
@@ -496,9 +496,7 @@ chmod +x WowzaStreamingEngine-4.3.0-linux-x64-installer.run
 // 配置wowza
 登录http://192.168.1.53:8088，创建名为enzo的application，Content Directory配置为Application-specific directory
 
-mkdir -p /data/cdn
-mkdir -p /data/cdn/poster
-mkdir -p /data/cdn/file
+mkdir -p /data/cdn /data/cdn/poster /data/cdn/file
 ln -s /data/cdn /usr/local/WowzaStreamingEngine/content/enzo
 
 cp /usr/local/workspace/enzo/conf/cdn_rsyncd.conf /etc/rsyncd.conf
