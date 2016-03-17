@@ -72,8 +72,12 @@ alter table resource add column recommend_number int(11);
 
 mysqldump -uroot -proot -B enzodemo --table resource_library_tags > resource_library_tags.sql
 mysqldump -opt -d enzodemo -uroot -proot > enzo.sql
+
+select database();
+
+show create table category;
 ```
-`select database();`
+
 
 ##### insert
 
@@ -216,3 +220,13 @@ flushall
 ##### stop redis server
 
 `redis-cli -p 6379 shutdown`
+
+##### mysql replace
+```
+update serial set file_path = replace(file_path,'/home/','/data3/') where file_path like '/home/store/%';
+```
+
+##### mysql grant
+```
+mysql -uroot -proot -e "grant all privileges on bugs.* to bugs@localhost identified by 'root'"
+```
