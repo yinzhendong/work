@@ -49,7 +49,6 @@ rpm -qa | grep packagename
 rpm -e libmediainfo0-0.7.68-313.1.x86_64
 ```
 ##### /etc/issue
-`more /etc/isssue`
 ```
 [root@tmp workspace]# more /etc/issue
 CentOS release 6.7 (Final)
@@ -76,6 +75,9 @@ mysqldump -opt -d enzodemo -uroot -proot > enzo.sql
 select database();
 
 show create table category;
+
+mysql -uroot -proot -e "create database mms default character set utf8"
+mysql -uroot -proot -D mms -e "source /root/mms.sql"
 ```
 
 
@@ -229,4 +231,15 @@ update serial set file_path = replace(file_path,'/home/','/data3/') where file_p
 ##### mysql grant
 ```
 mysql -uroot -proot -e "grant all privileges on bugs.* to bugs@localhost identified by 'root'"
+```
+##### useful commad
+```
+top htop vmstat ps pstree pmap iostat
+```
+##### git install
+```
+yum install libcurl-devel
+./configure --prefix=/usr/local --with-curl --with-expat
+make
+make install
 ```

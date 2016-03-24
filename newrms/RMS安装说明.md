@@ -25,9 +25,9 @@ Comment		创建文档
 rpm -ivh http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 rpm -ivh http://mirrors.ustc.edu.cn/epel//6/x86_64/epel-release-6-8.noarch.rpm
 yum groupinstall -y "Development Tools"
-yum install -y zlib zlib-devel readline readline-devel openssl openssl-devel mysql-devel
+yum install -y zlib zlib-devel readline readline-devel openssl openssl-devel mysql-devel lrzsz
 ```
-###前后台程序
+###web程序
 ####1. remove httpd
 ```
 yum remove httpd*
@@ -161,38 +161,6 @@ interfaceUrl=http://192.168.1.51:8000/ 		//接口地址
 zfKey=zfsoft_heuet_87656563
 ----------------------------------------------------------------------------
 
-// 修改前台用户空间userspace的js文件
-路径：/usr/local/workspace/web/rms/js/userspace
-需要修改的文件：caseAdd.js  caseFileAdd.js  childrenResourceAdd.js  courseAdd.js  courseHourAdd.js  resourceAdd.js  specialAdd.js
-以caseAdd.js为例，其他文件类似
-----------------------------------------------------------------------------
-/**
- * Created by Ruby on 2016/1/8.
- */
-var rows;
-var fileHash;
-(function(){
-    initResourcelib();
-    initResourceType();
-    initTag();
-    var r = new Flow({
-        target: 'http://192.168.1.51:8000/file/upload',			// 修改为接口服务ip和端口
-        chunkSize: 1024*1024,
-        testChunks: false,
-        simultaneousUploads: 1,
-        singleFile:true,
-        mehod:"POST"
-    });
-
-    var r2 = new Flow({
-        target: 'http://192.168.1.51:8000/file/upload',			// 修改为接口服务ip和端口
-        chunkSize: 1024*1024,
-        testChunks: false,
-        simultaneousUploads: 1,
-        singleFile:true,
-        mehod:"POST"
-----------------------------------------------------------------------------
-
 // 修改后台配置文件conn.properties
 vi /usr/local/workspace/web/bcms/WEB-INF/classes/conn.properties
 ----------------------------------------------------------------------------
@@ -245,6 +213,9 @@ COMMIT
 
 // 重启防火墙
 /etc/init.d/iptables restart
+
+// service
+tomcat nginx mysql
 ```
 
 ###接口服务
@@ -253,13 +224,8 @@ COMMIT
 参照前后台程序中的mysql安装，安装完成后创建接口数据库enzo
 create database enzo default character set utf8;
 
-// mediainfo
-yum install -y mediainfo
-
-// pip
-yum install -y python-pip
-
-// virtualenv
+// install mediainfo pip virtualenv
+yum install -y mediainfo python-pip
 pip install virtualenv
 
 // python2.7.8
@@ -276,17 +242,17 @@ virtualenv --python=/usr/local/workspace/python2.7.8/bin/python2.7 /usr/local/wo
 tar -zxvf redis-2.4.10.tar.gz -C /usr/local/workspace/
 cd /usr/local/workspace/redis-2.4.10
 make install
+redis-server
 
 // 初始化接口
 cd /usr/local/workspace/enzo
+mkdir -p /usr/local/workspace/enzo/dated_log/
 source venv/bin/activate
+pip install Django==1.8.2 django-annoying==0.8.2 django-debug-toolbar==1.3.2 django-mptt==0.7.1 \
+django-extensions==1.5.5 ipython==2.1.0 MySQL-python==1.2.5 pip==1.5.6
 make deps
 python manage.py makemigrations enzo && python manage.py migrate
 python manage.py init
-
-// make deps时根据提示pip install 缺少的依赖包
-pip install Django==1.8.2 django-annoying==0.8.2 django-debug-toolbar==1.3.2 django-mptt==0.7.1 \
-django-extensions==1.5.5 ipython==2.1.0 MySQL-python==1.2.5 pip==1.5.6
 
 // 修改接口配置文件中各服务IP和Port
 vi /usr/local/workspace/enzo/enzo/settings.py
@@ -320,7 +286,6 @@ LOG_SERVER_IP = "192.168.1.54"
 ----------------------------------------------------------------------------
 
 // 启动接口服务
-redis-server
 source /usr/local/workspace/enzo/venv/bin/activate
 cd /usr/local/workspace/enzo/
 python manage.py runserver 192.168.1.51:8000
@@ -368,14 +333,17 @@ hosts allow = 192.168.1.52							// 修改为数据服务IP
 // 配置logstash
 tar -zxvf logstash-1.5.4.tar.gz -C /usr/local/workspace
 /usr/local/workspace/logstash-1.5.4/bin/logstash -f /usr/local/workspace/enzo/conf/enzo_logstash
+
+// 需要启动的服务
+redis
+enzo
+logstash
 ```
 
 ###数据服务
 ```
-// pip
+// install pip virtualenv
 yum install -y python-pip
-
-// virtualenv
 pip install virtualenv
 
 // python2.7.8
@@ -390,12 +358,11 @@ virtualenv --python=/usr/local/workspace/python2.7.8/bin/python2.7 /usr/local/wo
 
 cd /usr/local/workspace/enzo
 source venv/bin/activate
-make deps
-// make deps时根据提示pip install 缺少的依赖包
 pip install Django==1.8.2 django-annoying==0.8.2 django-debug-toolbar==1.3.2 django-mptt==0.7.1 \
 django-extensions==1.5.5 ipython==2.1.0 MySQL-python==1.2.5 pip==1.5.6
+make deps
 
-// 修改配置文件local_settings.py中的HOST为接口服务IP
+// 修改配置文件local_settings.py中的HOST为Enzo接口服务IP
 cp /usr/local/workspace/enzo/conf/data_local_settings.py /usr/local/workspace/enzo/enzo/local_settings.py
 vi /usr/local/workspace/enzo/enzo/local_settings.py
 ----------------------------------------------------------------------------
@@ -431,6 +398,9 @@ yum install mediainfo -y
 source /usr/local/workspace/enzo/venv/bin/activate
 pip install web.py psutil
 python /usr/local/workspace/enzo/enzo/scripts/web_stats.py 8120
+
+// service
+web_stats.py
 ```
 
 ###CDN服务
@@ -515,10 +485,8 @@ hosts allow = 192.168.1.52		// 添加数据服务器IP
 tar -zxvf logstash-1.5.4.tar.gz -C /usr/local/workspace
 /usr/local/workspace/logstash-1.5.4/bin/logstash -f /usr/local/workspace/enzo/conf/cdn_logstash
 
-// pip
+// install pip virtualenv
 yum install -y python-pip
-
-// virtualenv
 pip install virtualenv
 
 // python2.7.8
@@ -533,15 +501,17 @@ virtualenv --python=/usr/local/workspace/python2.7.8/bin/python2.7 /usr/local/wo
 
 cd /usr/local/workspace/enzo
 source venv/bin/activate
-make deps
-// make deps时根据提示pip install 缺少的依赖包
 pip install Django==1.8.2 django-annoying==0.8.2 django-debug-toolbar==1.3.2 django-mptt==0.7.1 \
 django-extensions==1.5.5 ipython==2.1.0 MySQL-python==1.2.5 pip==1.5.6
+make deps
 
 // 服务器管理程序
 source /usr/local/workspace/enzo/venv/bin/activate
 pip install web.py psutil
 python /usr/local/workspace/enzo/enzo/scripts/web_stats.py 8120
+
+// service
+nginx rsync web_stats.py
 ```
 
 ###日志服务
@@ -566,7 +536,7 @@ cd /usr/local/workspace/conv
 // 安装ApiService，修改配置文件
 tar -zxf /usr/local/workspace/conv/apache-tomcat-7.0.64.tar.gz -C /app
 ln -s /app/apache-tomcat-7.0.64/ /app/tomcat
-cp /app/ApiService.war /app/tomcat/webapps/
+unzip /app/ApiService.war -d /app/tomcat/webapps/ApiService
 
 vi /app/tomcat/webapps/ApiService/WEB-INF/classes/apiConfig.properties
 ----------------------------------------------------------------------------
@@ -709,11 +679,9 @@ COMMIT
 1. 启动soffice
 nohup soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard &
 2. 启动tomcat
-cd /app/tomcat/bin
-./startup.sh
+/app/tomcat/bin/startup.sh
 3. 启动zookeeper
-cd /app/zookeeper/bin
-./zkServer.sh start
+/app/zookeeper/bin/zkServer.sh start
 4. 启动001，转码服务
 cd /app/output/001
 nohup java -jar FileTransEncode.jar &
