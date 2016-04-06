@@ -243,3 +243,8 @@ yum install libcurl-devel
 make
 make install
 ```
+
+##### rsync
+```
+rsync -avzP reposes/ '-e ssh -p 60019' root@111.198.38.123:/data/yinzd
+```
