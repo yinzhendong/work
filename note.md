@@ -248,3 +248,8 @@ make install
 ```
 rsync -avzP reposes/ '-e ssh -p 60019' root@111.198.38.123:/data/yinzd
 ```
+
+##### find
+```
+find . -mtime +60 | xargs ls -lht
+```
