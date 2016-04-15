@@ -11,10 +11,11 @@ To solve the mkfs.ext4 not support bigger than 16T problem.
 ```
 1. use lvm to create total space and initlization by mke2fs
 ```
-##### notice
+##### caution
 ```
-1. bigger than 16T can not support online extend, unmount first!
-2. mke2fs -i parameter
+1. use the mke2fs firt in less than 16T situation, else extend will lose all old data!!!
+2. bigger than 16T can not support online extend, unmount first!
+3. mke2fs -i parameter
 ```
 ##### scene
 ```
