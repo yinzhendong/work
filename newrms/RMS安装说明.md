@@ -511,7 +511,7 @@ pip install web.py psutil
 python /usr/local/workspace/enzo/enzo/scripts/web_stats.py 8120
 
 // service
-nginx rsync web_stats.py
+nginx rsync web_stats.py logstash
 ```
 
 ###日志服务
