@@ -338,6 +338,7 @@ tar -zxvf logstash-1.5.4.tar.gz -C /usr/local/workspace
 redis
 enzo
 logstash
+rsync
 ```
 
 ###数据服务
@@ -688,6 +689,66 @@ nohup java -jar FileTransEncode.jar &
 5. 启动002，转码负载
 cd /app/output/002
 nohup java -jar FileTransCache.jar > /dev/null 2>&1 &
+
+// 多台转码服务器配置及启动
+
+java -jar FileTransEncode.jar 192.168.1.55:2181 Test55 192.168.1.55:8883
+java -jar FileTransEncode.jar 192.168.1.55:2181 Test56 192.168.1.56 8881
+java -jar FileTransEncode.jar 192.168.1.55:2181 Test57 192.168.1.57 8882
+
+// 多台转码zookeeper设置
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/app/zk/data
+dataLogDir=/app/log/zk/datalog
+# the port at which the clients will connect
+clientPort=2181
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+server.1=192.168.1.55:8881:8882     //改成实际
+
+// SftpConfig.xml
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <host>192.168.1.52</host>
+    <username>root</username>
+    <password>password</password>
+    <port>22</port>
+    <temppath>/app/temp/</temppath>
+    <tempConvertpath>/app/temp/encode/</tempConvertpath>
+    <Convertpath>/app/temp/</Convertpath>
+    <EncodeParam>-e x264 -q 21 -O</EncodeParam>
+    <!--截图后图片存放在址-->
+    <picpath>/app/temp/pic/</picpath>
+    <tempPicConvertpath>/app/temp/pic/</tempPicConvertpath>
+    <!--截图程式地址-->
+    <picexe>/usr/bin/ffmpeg</picexe>
+    <!--转AVI程式地址-->
+    <aviexe>/usr/bin/mencoder</aviexe>
+    <!--Mediainfo-->
+    <mediainfo>/usr/bin/mediainfo</mediainfo>
+    <outflag>true</outflag>
+    <transcodeexe>HandBrakeCLI</transcodeexe>
+</root>
+
+
+```
+
+### logstash配置文件
+```
+修改logstash配置文件中的ip地址
 ```
 
 ###本地打包
