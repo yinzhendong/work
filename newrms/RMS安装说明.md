@@ -692,7 +692,7 @@ nohup java -jar FileTransCache.jar > /dev/null 2>&1 &
 
 // 多台转码服务器配置及启动
 
-java -jar FileTransEncode.jar 192.168.1.55:2181 Test55 192.168.1.55:8883
+java -jar FileTransEncode.jar 192.168.1.55:2181 Test55 192.168.1.55 8883
 java -jar FileTransEncode.jar 192.168.1.55:2181 Test56 192.168.1.56 8881
 java -jar FileTransEncode.jar 192.168.1.55:2181 Test57 192.168.1.57 8882
 
