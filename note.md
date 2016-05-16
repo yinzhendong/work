@@ -253,3 +253,8 @@ rsync -avzP reposes/ '-e ssh -p 60019' root@111.198.38.123:/data/yinzd
 ```
 find . -mtime +60 | xargs ls -lht
 ```
+
+##### svn
+```
+svn switch --relocate http://repos.ouknow.com/nts230/new/tiankeda/rms http://repos.boful.com/nts230/new/tiankeda/rms
+```
