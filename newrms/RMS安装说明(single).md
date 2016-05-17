@@ -78,7 +78,7 @@ tar -zxf /root/NewRMSInstallation/apache-tomcat-7.0.64.tar.gz -C /home/boful/
 ln -s /home/boful/apache-tomcat-7.0.64/ /home/boful/tomcat
 
 //修改tomcat配置文件
-vi server.xml
+vi /home/boful/tomcat/conf/server.xml
 ----------------------------------------------------------------------------
 <Connector port="8080" protocol="HTTP/1.1"
            connectionTimeout="20000"
@@ -287,7 +287,7 @@ nginx
 ```
 // update git
 yum install libcurl-devel -y
-tar zxf /root/NewRMSInstallation/git-2.7.3.tar.gz
+tar zxf /root/NewRMSInstallation/git-2.7.3.tar.gz -C /root/NewRMSInstallation
 cd /root/NewRMSInstallation/git-2.7.3
 ./configure --prefix=/usr/local --with-curl --with-expat
 make
