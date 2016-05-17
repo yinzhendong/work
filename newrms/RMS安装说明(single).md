@@ -258,6 +258,8 @@ server {
     listen      8200;                           // soffice启动监听8100端口,此处改为8200,注意修改enzo接口配置文件
     server_name localhost;
 
+    error_page 404 = @homepage;
+
     root /data/cdn;
 
     location / {
@@ -266,8 +268,13 @@ server {
     location /download {
         rewrite ^/download/(.*) /$1? permanent;
     }
+
     location /broadcast {
         rewrite ^/broadcast/(.*) /$1? permanent;
+    }
+
+    location @homepage {
+        rewrite /(.*_poster.*) http://210.31.141.20:8120/convert_poster?poster=$1 permanent;
     }
 }
 ----------------------------------------------------------------------------
