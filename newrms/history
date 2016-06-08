@@ -1,0 +1,27 @@
+    License Key
+ET1B4-FCr7A-H6wCv-pMCJz-BHywm-MufR8-7DQDJFhjef9r
+
+Key Owner
+c2334051@trbvn.com
+
+    6  pvcreate /dev/sdb /dev/sdc
+    7  pvs
+    8  vgcreate vg_data /dev/sdb /dev/sdc
+    9  vgs
+   10  vgdisplay
+   11  lvcreate -n lv_data -l 7152638 /dev/vg_data
+   12  lvs
+   13  git clone git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git
+   14  cd e2fsprogs/
+   15  ./configure
+   16  make
+   17  make install
+   18  mke2fs -O 64bit,has_journal,extents,huge_file,flex_bg,uninit_bg,dir_nlink,extra_isize -i 2097152 /dev/vg_data/lv_data
+   19  mkdir /data
+   20  mount /dev/vg_data/lv_data
+   21  mount /dev/vg_data/lv_data /data
+   22  ll
+   23  df -lh
+   24  cd
+   25  ll
+   26  vi /etc/fstab
