@@ -26,7 +26,7 @@ Comment		创建文档
 rpm -ivh http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 rpm -ivh http://mirrors.ustc.edu.cn/epel//6/x86_64/epel-release-6-8.noarch.rpm
 yum groupinstall -y "Development Tools"
-yum install -y zlib zlib-devel readline readline-devel openssl openssl-devel mysql-devel lrzsz htop telnet iptraf
+yum install -y zlib zlib-devel readline readline-devel openssl openssl-devel mysql-devel lrzsz htop telnet iptraf ImageMagick
 ```
 ### 三. 关闭SeLinux
 ```
