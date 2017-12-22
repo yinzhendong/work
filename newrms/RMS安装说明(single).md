@@ -23,7 +23,8 @@ Comment		创建文档
 ### 二. 全局设置
 ```
 // 服务器添加更新源安装依赖包
-rpm -ivh http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+// rpm -ivh http://apt.sw.be/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+rpm -ivh http://repository.it4i.cz/mirrors/repoforge/redhat/el6/en/x86_64/rpmforge/RPMS/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
 rpm -ivh http://mirrors.ustc.edu.cn/epel//6/x86_64/epel-release-6-8.noarch.rpm
 yum groupinstall -y "Development Tools"
 yum install -y zlib zlib-devel readline readline-devel openssl openssl-devel mysql-devel lrzsz htop telnet iptraf ImageMagick
