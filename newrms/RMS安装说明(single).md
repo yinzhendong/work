@@ -336,7 +336,7 @@ redis-server
 // 初始化接口
 cd /home/boful/enzo/
 source venv/bin/activate
-pip install Django==1.8.2 django-annoying==0.8.2 django-debug-toolbar==1.3.2 django-mptt==0.7.1 django-extensions==1.5.5 ipython==2.1.0 MySQL-python==1.2.5 pip==1.5.6 arrow==0.5.4 redis==2.10.3 django-redis-cache==0.13.0 hiredis==0.1.5 requests==2.7.0 django-filter==0.11.0 psutil==3.2.2 elasticsearch==2.1.0 django-cors-headers==1.1.0
+pip install -r requirements.txt
 make deps
 python manage.py makemigrations enzo && python manage.py migrate
 python manage.py init
