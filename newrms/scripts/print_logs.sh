@@ -1,5 +1,3 @@
 #!/bin/bash
 
-cd tomcat/logs
-tail -f catalina.out
-
+tail -f /home/boful/tomcat/catalina.out
