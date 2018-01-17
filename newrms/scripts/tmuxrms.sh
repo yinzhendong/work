@@ -27,7 +27,7 @@ wn_transcode_encode=encode
 wn_transcode_cache=cache
 
 # Tmux that the window to execute
-cmd_redis="redis-server"
+cmd_redis="redis-server /etc/redis.conf"
 cmd_enzo="cd ${enzo_path} && source venv/bin/activate && python manage.py runserver ${ip}:${port}"
 cmd_webstats="cd ${enzo_path} && source venv/bin/activate && python enzo/scripts/web_stats.py 8120"
 cmd_elastic="/home/boful/elasticsearch-1.7.2/bin/elasticsearch"
