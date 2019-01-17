@@ -25,7 +25,7 @@ echo "file duration in seconds is $((total_seconds/1000))"
 echo "file spilt in $((total_seconds/1000/60)) clips"
 
 # work bug have some problem
-for (( i = 1; i <= ((total_seconds/1000/60)); i++ )); do
+for ((i = 1; i <= ((total_seconds/1000/60)); i++)); do
 	#echo $i
 	#echo "ffmpeg -ss $(((i-1)*60)) -t 60 -i $file_path -acodec copy -vcodec copy $file_path-$i.$file_type"
 	ffmpeg -ss $(((i-1)*60)) -t 60 -i $file_path -acodec copy -vcodec copy $file_path-$i.$file_type

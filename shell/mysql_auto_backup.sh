@@ -4,7 +4,7 @@
 dbuser=root
 dbpasswd=root
 dbname=enzo
-backup_path=/backup1
+backup_path=/home/boful/backup
 #backup_file_name=`date "+%Y%m%d_%H%M%S"`
 backup_file_name=`date "+%Y%m%d"`.${dbname}
 
@@ -14,13 +14,13 @@ mysqldump -u${dbuser} -p${dbpasswd} ${dbname} > ${backup_path}/${backup_file_nam
 
 
 #echo "Zipping File......"
-tar -zcf ${backup_path}/${backup_file_name}.tar.gz ${backup_path}/${backup_file_name}.sql
+#tar -zcf ${backup_path}/${backup_file_name}.tar.gz ${backup_path}/${backup_file_name}.sql
 
 #rm -rf ${bakcup_path}${backup_file_name}.sql
 
 #echo "Saving logs......"
 
-echo ${backup_file_name}.tar.gz >> ${backup_path}/log
+#echo ${backup_file_name}.tar.gz >> ${backup_path}/log
 
 #echo "Done!"
 
